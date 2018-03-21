@@ -10,16 +10,12 @@ class ContextMock: FlowContext {
 }
 
 class ContextTests: XCTestCase {
-    var eventSource: EventSourceSessionMock!
     var sut: Context!
 
     override func setUp() {
         super.setUp()
-        eventSource = EventSourceSessionMock()
         sut = Context(configuration: ConfigurationMock(),
-                      errorHandler: ErrorHandlingMock(),
-                      eventSource: eventSource,
-                      persistentStore: PersistentStoreServiceMock())
+                      errorHandler: ErrorHandlingMock())
     }
     
     override func tearDown() {
@@ -28,7 +24,8 @@ class ContextTests: XCTestCase {
     }
 
     func testNoMemoryRetainCyclesWithEventSourceOnDeinit() {
+        weak var weakSelf = sut
         sut = nil
-        XCTAssertTrue(eventSource.stopInvoked)
+        XCTAssertNil(weakSelf)
     }
 }
