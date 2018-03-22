@@ -8,8 +8,8 @@ protocol HomeViewModel: ErrorHandling {
 
     var isOngoingSession: Driver<Bool> { get }
     var nextPhase: Driver<Phase?> { get }
-    var timeLeftInPhase: Driver<TimeInterval?> { get }
-    var timeLeftInSession: Driver<TimeInterval?> { get }
+    var timeLeftInPhase: Driver<String?> { get }
+    var timeLeftInSession: Driver<String?> { get }
 
     func start()
 }
@@ -27,9 +27,15 @@ class HomeViewModelImpl: HomeViewModel {
     private let nextPhaseSubject = PublishSubject<Phase?>()
     private var currentPhase: Phase?
 
-    var timeLeftInPhase: Driver<TimeInterval?> { return timeLeftInPhaseRelay.asDriver() }
+    var timeLeftInPhase: Driver<String?> {
+        return timeLeftInPhaseRelay.asDriver()
+            .map { $0?.formattedString ?? nil }
+    }
     private let timeLeftInPhaseRelay = BehaviorRelay<TimeInterval?>(value: nil)
-    var timeLeftInSession: Driver<TimeInterval?> { return timeLeftInSessionRelay.asDriver() }
+    var timeLeftInSession: Driver<String?> {
+        return timeLeftInSessionRelay.asDriver()
+            .map { $0?.formattedString ?? nil }
+    }
     private let timeLeftInSessionRelay = BehaviorRelay<TimeInterval?>(value: nil)
 
     private var timer: Timer?
@@ -43,7 +49,7 @@ class HomeViewModelImpl: HomeViewModel {
     }
 
     func start() {
-        self.context.jsonLoader.loadJSON(bundle: Bundle.main, from: "TestProject", ofType: "json") { [weak self] json in
+        self.context.jsonLoader.loadJSON(bundle: Bundle.main, from: "TestProgram", ofType: "json") { [weak self] json in
             self?.startSession(with: json)
         }
     }
@@ -60,9 +66,6 @@ class HomeViewModelImpl: HomeViewModel {
     }
 
     @objc private func timerFired() {
-        isOngoingSessionRelay.accept(self.context.breathSession.status == .running)
-        timeLeftInPhaseRelay.accept(self.context.breathSession.timeLeftInPhase)
-        timeLeftInSessionRelay.accept(self.context.breathSession.timeLeftInProgram)
         let phase = self.context.breathSession.currentPhase
         if currentPhase !== phase {
             currentPhase = phase
@@ -73,7 +76,19 @@ class HomeViewModelImpl: HomeViewModel {
             timer?.invalidate()
             timer = nil
         }
+        isOngoingSessionRelay.accept(self.context.breathSession.status == .running)
+        timeLeftInPhaseRelay.accept(self.context.breathSession.timeLeftInPhase)
+        timeLeftInSessionRelay.accept(self.context.breathSession.timeLeftInProgram)        
     }
 }
 
 extension HomeViewModelImpl: ViewModel { }
+
+extension TimeInterval {
+    var formattedString: String {
+        let minutes = Int(self / 60)
+        let seconds = Int(self.truncatingRemainder(dividingBy: 60))
+
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}

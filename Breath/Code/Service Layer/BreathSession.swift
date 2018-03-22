@@ -68,6 +68,7 @@ class BreathSessionImpl: BreathSession {
         currentProgram = program
         timePassedBeforPause = nil
         status = .running
+        startOfProgram = Date()
     }
 
     func stop() {
