@@ -12,6 +12,10 @@ protocol BreathSession {
     func resume()
 }
 
+protocol HasBreathSession {
+    var breathSession: BreathSession { get }
+}
+
 enum SessionStatus {
     case stopped
     case paused

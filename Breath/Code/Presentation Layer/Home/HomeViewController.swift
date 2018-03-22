@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     }
 
     private func setupViewModelBindings() {
-        navigationItem.title = viewModel.title
+//        navigationItem.title = viewModel.title
     }
 }
 

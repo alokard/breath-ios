@@ -14,9 +14,13 @@ class ApplicationController: ErrorHandling {
 
         let configuration = ConfigurationImpl(environment: AppEnvironment())
         let errorHandler = SimpleErrorHandler()
+        let breathSession = BreathSessionImpl()
+        let jsonLoader = JSONLoaderImpl()
 
         context = Context(configuration: configuration,
-                          errorHandler: errorHandler)
+                          errorHandler: errorHandler,
+                          breathSession: breathSession,
+                          jsonLoader: jsonLoader)
     }
 
     func setupWithLaunchOptions(_ launchOptions: [AnyHashable: Any]?) {
