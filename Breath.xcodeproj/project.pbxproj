@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44015B992063DCAA00257683 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44015B982063DCAA00257683 /* UIColor+HexString.swift */; };
 		4403F7D620624AEA003E59B3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4403F7D420624AEA003E59B3 /* RxSwift.framework */; };
 		4403F7D720624AEA003E59B3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4403F7D520624AEA003E59B3 /* RxCocoa.framework */; };
 		4403F7E12062590C003E59B3 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4403F7E02062590C003E59B3 /* JSON.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44015B982063DCAA00257683 /* UIColor+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		4403F7D420624AEA003E59B3 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		4403F7D520624AEA003E59B3 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		4403F7E02062590C003E59B3 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				4403F81020625C64003E59B3 /* Storyboard */,
 				4403F80020625BA6003E59B3 /* ViewModel.swift */,
 				4403F80120625BA6003E59B3 /* UITableViewCell+Dequeueable.swift */,
+				44015B982063DCAA00257683 /* UIColor+HexString.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				4403F7EA20625959003E59B3 /* Context.swift in Sources */,
 				4403F80620625BA6003E59B3 /* UIViewController+Rx.swift in Sources */,
 				446C183F206037F3007B3641 /* AppDelegate.swift in Sources */,
+				44015B992063DCAA00257683 /* UIColor+HexString.swift in Sources */,
 				4403F7E620625931003E59B3 /* MainFlowController.swift in Sources */,
 				4403F81B2062832B003E59B3 /* Program.swift in Sources */,
 				4403F82120629001003E59B3 /* BreathSession.swift in Sources */,
